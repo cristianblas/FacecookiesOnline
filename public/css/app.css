@@ -85,7 +85,12 @@ hr {
   overflow: visible;
 }
 
-h1,
+h1 {
+  margin: 0 0 50px 0;
+    padding: 0;
+    font-size: 26px;
+    color: #fff;
+}
 h2,
 h3,
 h4,
@@ -238,6 +243,8 @@ th {
 label {
   display: inline-block;
   margin-bottom: 0.5rem;
+  color: #ffffff;
+
 }
 
 button {
@@ -4941,7 +4948,7 @@ input[type=button].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background: radial-gradient(ellipse at center, #5170ad 0%, #355493 100%);
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
@@ -4978,6 +4985,7 @@ input[type=button].btn-block {
   flex: 1 1 auto;
   min-height: 1px;
   padding: 1.25rem;
+  background: radial-gradient(ellipse at center, #5170ad 0%, #355493 100%);
 }
 
 .card-title {

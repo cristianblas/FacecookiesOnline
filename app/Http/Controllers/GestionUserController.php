@@ -12,8 +12,16 @@ class GestionUserController extends Controller
         // $this->middleware('auth');
         // $this->middleware('auth')->except(['main','edit']);
      }
-    public function index()
+    public function index(Request $request)
     {
+        if($request){
+            $query = trim($request->get('search'));
+            $users = User::where('name','LIKE','%'. $query .'%')
+                ->orderBy('id','asc')
+                ->get();
+
+            return view('user.main',['users'=>$users,'search'=>$query]);
+        }
         $user = User::all();
         return view('user.main')->with([
              'users' => User::all(),
@@ -25,10 +33,6 @@ class GestionUserController extends Controller
     }
     public function store(Request $request){
 
-     //   dd($request->all());
-       // $datos['date']=$request->get('name');
-       // dd($datos);
-        
         User::create([
             
             'name' => $request['name'],
@@ -40,85 +44,26 @@ class GestionUserController extends Controller
             'password' => Hash::make($request['password']),
         ]);
         
-        return redirect()->route('usuarios.index');
-
-
-
-
-       /*
-        $rules = [
-            'title' => ['required','max:255'],
-            'description' => ['required','max:1000'],
-            'price' => ['required','min:1'],
-            'stock' => ['required','min:0'],
-            'status' => ['required','in:available,unavailable'],
-        ];
-        request()->validate($rules);
-
-
-        if(request()->status == 'available' && request()->stock == 0){
-            return redirect()
-                ->back()
-                ->withInput(request()
-                ->all())
-                ->withErrors('If available must be have stock');
-
-        }
-
-
-      //  $product = Product::create([
-        //    'title' => request()->title,
-         //   'description' =>request()->description,
-         //   'price' => request()->price,
-         //   'stock'=> request()->stock,
-          //  'status'=>request()->status,
-      //  ]);
-
-      $product = Product::create(request()->all());
-     // session()->flash('success', "the new product with id {$product->id} was created");
-
-       // return redirect()->back();
-       // return redirect()->action('ProductsController@main');
-      
-       return redirect()->route('products.main')
-        
-            ->withSuccess("the new product with id {$product->id} was created");
-*/ 
+        return redirect()->route('usuarios.index')
+        ->withSuccess("the new user  was created"); 
     }
-    /*
-    public function show(Product $product){
-        //  $product = Product::findOrFail($product);
-          return view('products.show')->with([
-              'product' => $product,
-  
+    public function edit($user){
+          return view('User.edit')->with([
+              'user' => User::findOrFail($user),
           ]);
       }
-      public function edit($product){
-          return view('products.edit')->with([
-              'product' => Product::findOrFail($product),
-          ]);
+    public function update($user){
+          $user = User::findOrFail($user);
+          $user->update(request()->all());
+          return redirect()->route('usuarios.index')
+          ->withSuccess("the user was Edited");
+
       }
-      public function update($product){
-          $rules = [
-              'title' => ['required','max:255'],
-              'description' => ['required','max:1000'],
-              'price' => ['required','min:1'],
-              'stock' => ['required','min:0'],
-              'status' => ['required','in:available,unavailable'],
-          ];
-          request()->validate($rules);
-          $product = Product::findOrFail($product);
-          $product->update(request()->all());
-          return redirect()->route('products.main')
-          ->withSuccess("the new product with id {$product->id} was Edited");
-  
+    public function destroy($user){
+          $user = User::findOrFail($user);
+          $user->delete();        
+          return redirect()->route('usuarios.index')
+          ->withSuccess("the user was deleted");   
       }
-      public function destroy($product){
-          $product = Product::findOrFail($product);
-          $product->delete();        
-          return redirect()->route('products.main')
-          ->withSuccess("the new product with id {$product->id} was deleted");
-          
-      }
-      */
+
 }

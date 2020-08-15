@@ -1,6 +1,21 @@
 @extends('layouts.layout') 
 @section('content')
-<h1>Facecookies</h1>
+<font size=32 style="color:#132735" face="Segoe UI">
+<h1 align="center">Facecookies</h1>
+</font>
+<h1> <form class="form-inline " >
+    <div class="input-group input-group-sm">
+      <input class="form-control form-control-navbar" name="search" type="search" placeholder="Search" aria-label="Search">
+      <div class="input-group-append">
+        <button class="btn btn-navbar" type="submit">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+    
+</h1>
+
 <a class="btn btn-success" href="{{ route('usuarios.create')}}">Create</a>
 @empty ($users)
     <div class="alert alert-warning">
@@ -33,21 +48,13 @@
                 <td>{{ $user->status}}</td>
                 <td>{{ $user->admin}}</td>
                 <td>
-                    {{--
-                    <a class="btn btn-link" 
-                        href="{{ route('GestionUsers.show',['user' => $user->id])}}">
-                        Show</a>
-
-                        <a class="btn btn-link" 
-                        href="{{ route('GestionUsers.edit', ['user' => $user->id ])}}">
-                        Edit</a>
-
-                        <form method="POST" class="d-inline" action="{{ route('GestionUsers.destroy', ['user' => $user->id ])}}">
+                        <a class="btn btn-primary" 
+                        href="{{ route('usuarios.edit',$user->id)}}">Edit</a>
+                        <form method="POST" class="d-inline" action="{{ route('usuarios.destroy',$user->id )}}">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-link">Delete</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
-                        --}}
                 </td>
             </tr>
             @endforeach

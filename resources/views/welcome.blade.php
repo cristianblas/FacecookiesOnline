@@ -62,6 +62,8 @@
                 margin-bottom: 30px;
             }
         </style>
+      <!--  <link href="{{ asset('css/app2.css') }}" rel="stylesheet"> -->
+
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -79,15 +81,9 @@
                 </div>
             @endif
 
-            <div class="content">
+            <div class="content" >
                 <div class="title m-b-md">
                     Facecookies
-                </div>
-
-                <div class="links">
-                    <a href="{{ url('/') }}">About Us</a>
-                    <a href="{{ url('/') }}">Contact Us</a>
-                    <a href="{{ url('/') }}">Group 14</a>
                 </div>
             </div>
         </div>

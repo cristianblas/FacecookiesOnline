@@ -22,7 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   
 <div class="wrapper">
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-blue navbar-light" >
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light" >
     <!-- Left navbar links -->
     @if(!(auth()->user()->admin))
     <ul class="navbar-nav">
@@ -30,17 +30,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="\home" class="nav-link">casa</a>
+        <a href="\home" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contacts</a>
       </li>
     </ul>
-    @endif
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    <!-- SEARCH FORM FOR USER -->
+    <form class="form-inline ml-3" >
       <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control form-control-navbar" name="searchfriend" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
           <button class="btn btn-navbar" type="submit">
             <i class="fas fa-search"></i>
@@ -48,10 +47,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
       </div>
     </form>
-
+    @endif
+    <!-- SEARCH FORM FOR ADMIN -->
+    
+  
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
+      @if(!(auth()->user()->admin))
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-comments"></i>
@@ -73,10 +76,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
+      @endif
       <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i
-            class="fas fa-th-large"></i></a>
+            class="fa fa-cog fa-spin fa-1x fa-fw"></i></a>
       </li>
+       
 
       <!-- LOG OUT -->
       @guest
@@ -112,7 +117,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </nav>
   <!-- /.navbar -->
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-white-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Sidebar -->
     <div class="sidebar " >
       <!-- Sidebar user panel (optional) -->
@@ -121,14 +126,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="{{asset('dist/img/usuario.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-        <a href="#" class="d-block" style="color:#0c0101"> {{Auth::user()->name}}</a>
+        <a href="/home" class="d-block" style="color:#9dbdd3" > {{Auth::user()->name}}</a>
         </div>
       </div>
 
       @if (Auth::user()->admin==true) 
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <p class="nav-icon fa fa-fw fa-home" style="color:#20093b">  Admin of Facecookies</p>
+            <p class="nav-icon fa fa-fw fa-home" style="color:#9dbdd3">  Admin of Facecookies</p>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('usuarios.index') }}" aria-expanded="false">
                     <i class="nav-icon fa fa-fw fa-user"></i>
