@@ -9,11 +9,12 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-        <!-- Styles -->
+        <!-- Styles background-color: #fff;-->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
+                background: radial-gradient(ellipse at center, #5170ad 0%, #355493 100%);
+                
+                color: #ffffff;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
@@ -49,7 +50,7 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color: #ffffff;
                 padding: 0 25px;
                 font-size: 13px;
                 font-weight: 600;
@@ -59,6 +60,8 @@
             }
 
             .m-b-md {
+
+                color: #fff;
                 margin-bottom: 30px;
             }
         </style>

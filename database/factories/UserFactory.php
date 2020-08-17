@@ -20,8 +20,9 @@ use Illuminate\Support\Str;
 $factory->define(User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'sex' => $faker->title(1), 
-        'date_of_birth'=>$faker->date($format = 'Y-m-d', $max = 'now') ,
+        'last_name' => $faker->title(10),
+        'gender' => $faker->title(5), 
+        'years'=>$faker->numberBetween(1,42) ,
         'telephone' =>$faker->randomNumber(),
         'status'=>$faker->boolean(),
         'style'=>$faker->safeColorName(),

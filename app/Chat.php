@@ -9,8 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Chat extends Model
 {
     protected $fillable = [
-        'friend_idsolicitante',
-        'friend_idsolicitado',
+        'id_friend',
     ];
 
     public function friends(){
