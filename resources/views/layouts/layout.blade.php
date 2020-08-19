@@ -114,9 +114,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('usuarios.index') }}" aria-expanded="false">
                     <i class="nav-icon fa fa-fw fa-user"></i>
-                    <p>
-                      
-                        Gestionar Usuarios
+                    <p>  
+                    Gestionar Usuarios
                     </p>
                 </a>
             </li>
@@ -144,7 +143,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!--<p class="nav-icon fa fa-fw fa-home" style="color:#9dbdd3"></p> -->
             <li class="nav-item">
-               <a class="nav-link" href="{{ route('solicitudes.index') }}" aria-expanded="false"> 
+               <a class="nav-link" href="{{ route('contactos.index') }}" aria-expanded="false"> 
                     <i class="nav-icon fa fa-address-book" ></i>
                     <p>
                       Gestion de Contactos
@@ -152,13 +151,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
             </li>
             <li class="nav-item">
-                  <a class="nav-link" href="{{ route('solicitudes.index') }}" aria-expanded="false"> 
+                  <a class="nav-link" href="{{ route('busquedas.index') }}" aria-expanded="false"> 
                   <i class="fas fa-search" ></i>
                   <p>
                       Buscador de Amigos
                   </p>
                 </a>
             </li>
+            
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('solicitudes.index') }}" aria-expanded="false"> 
                   <i class="fa fa-user-plus" ></i>
@@ -167,6 +167,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </p>
                 </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('chats.index') }}" aria-expanded="false"> 
+                <i class="fa fa-envelope-open" ></i>
+                <p>
+                    Mensajes
+                </p>
+              </a>
+            </li>
+            {{--
+          <li class="nav-item">
+              <a class="nav-link" href="{{ route('notificaciones.index') }}" aria-expanded="false"> 
+              <i class="fa fa-bell" ></i>
+              <p>
+                  Notificaciones
+              </p>
+            </a>
+          </li>
+        --}}
         </ul>
       </nav>
       @endif

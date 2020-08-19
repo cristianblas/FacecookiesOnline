@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Friend ;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -17,7 +18,8 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $status = ['true'];
+   // protected $status = ['true'];
+
     protected $style = null ;
     protected $font = null ;
     protected $fillable = [
@@ -33,8 +35,11 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function friends(){
-        return $this->belongsToMany(Friend::class);
+    public function friends_solicitante(){
+        return $this->hasMany(Friend::class,'id_solicitante');
+    }
+    public function friends_solicitado(){
+        return $this->hasMany(Friend::class,'id_solicitado');
     }
     /**
      * The attributes that should be hidden for arrays.
@@ -53,4 +58,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    
+    public static function searchFriend($id){
+        $solicitudesPendientes = Friend::getSolicitado($id);
+        $solicitudesEnviadas = Friend::getSolicitudes($id);
+        $users = Friend::getContactos($id);
+        foreach ($solicitudesPendientes as $solicitudes) {
+            $data[] = $solicitudes->name;
+        }
+        foreach ($solicitudesEnviadas as $enviadas) {
+            $data[] = $enviadas->name;
+        }
+        foreach ($users as $user) {
+            $data[] = $user->name;
+        }
+        $available = User::where('admin','=',false)->where('users.id','!=',$id)
+            ->orderBy('id', 'asc')->whereNotIn('name', $data)->get();
+        return($available);
+    }
 }
