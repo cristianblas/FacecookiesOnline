@@ -20,6 +20,149 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+  <style>
+    /* width */
+    ::-webkit-scrollbar {
+        width: 7px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #a7a7a7;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #929292;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    .user-wrapper, .message-wrapper {
+        border: 1px solid #dddddd;
+        overflow-y: auto;
+    }
+
+    .user-wrapper {
+        height: 600px;
+    }
+
+    .user {
+        cursor: pointer;
+        padding: 5px 0;
+        position: relative;
+    }
+
+    .user:hover {
+        background: #eeeeee;
+    }
+
+    .user:last-child {
+        margin-bottom: 0;
+    }
+
+    .pending {
+        position: absolute;
+        left: 10px;
+        top: 9px;
+        background: #66aa26;
+        margin: 0;
+        border-radius: 50%;
+        width: 9px;
+        height: 9px;
+        line-height: 18px;
+        padding-left: 5px;
+        color: #ffffff;
+        font-size: 12px;
+    }
+
+    .media-left {
+        margin: 0 10px;
+    }
+
+    .media-left img {
+        width: 64px;
+        border-radius: 64px;
+    }
+
+    .media-body p {
+        margin: 6px 0;
+    }
+
+    .message-wrapper {
+        padding: 10px;
+        height: 536px;
+        background: #eeeeee;
+    }
+
+    .messages .message {
+        margin-bottom: 15px;
+    }
+
+    .messages .message:last-child {
+        margin-bottom: 0;
+    }
+
+    .received, .sent {
+        width: 45%;
+        padding: 3px 10px;
+        border-radius: 10px;
+    }
+
+    .received {
+        background: #ffffff;
+    }
+
+    .sent {
+        background: #3bebff;
+        float: right;
+        text-align: right;
+    }
+
+    .message p {
+        margin: 5px 0;
+    }
+
+    .date {
+        color: #777777;
+        font-size: 12px;
+    }
+
+    .active {
+        background: #eeeeee;
+    }
+
+    input[type=text] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 15px 0 0 0;
+        display: inline-block;
+        border-radius: 4px;
+        box-sizing: border-box;
+        outline: none;
+        border: 1px solid #cccccc;
+    }
+
+    input[type=text]:focus {
+        border: 1px solid #aaaaaa;
+    }
+</style>
+
+
+
 </head>
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
@@ -245,9 +388,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ============================================================== -->
 <!-- jQuery -->
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+
+<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
+
 </body>
 </html>

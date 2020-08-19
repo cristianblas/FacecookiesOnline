@@ -12,11 +12,14 @@ class GestionMessageController extends Controller
     public function index()
     {   
         $id=(auth()->user()->id);
+        $users = Friend::getContactos($id);
         $contacts = Chat::getChats($id);
         return view('chats.index')->with([
-            'contactos' => $contacts
+            'contactos' => $contacts,
+            'users'=>$users
         ]) 
-        ;
         
+        ;
+       
     }
 }

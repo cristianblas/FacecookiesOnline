@@ -4,6 +4,7 @@ namespace App;
 
 use App\Friend;
 use App\Message;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Chat extends Model
@@ -21,10 +22,13 @@ class Chat extends Model
         $users = Friend::getContactos($id);
         foreach ($users as $user) {
             $data[] = $user->id;
-            $data2[] = $user->name;
-            $data3[] = $user->email;
         }
-        $available = Chat::
+        $available = DB::table('chats')
+            ->select('id','id_friend')
+            ->whereIn('id_friend',$data)
+            ->get();
+        //$contactos = $users->concat($available);
+        //dd($contactos);
         return($available);
     }
     
