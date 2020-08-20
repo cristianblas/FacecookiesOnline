@@ -57,7 +57,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     }
 
     .user-wrapper {
-        height: 600px;
+        height: 500px;
     }
 
     .user {
@@ -104,7 +104,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     .message-wrapper {
         padding: 10px;
-        height: 536px;
+        height: 430px;
         background: #eeeeee;
     }
 
@@ -159,9 +159,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     input[type=text]:focus {
         border: 1px solid #aaaaaa;
     }
-</style>
-
-
+  </style>
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -381,6 +379,97 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
   </footer>
 </div>
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+  var receiver_id = '';
+  var my_id = "{{ Auth::id() }}";
+  $(document).ready(function () {
+      $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+      });
+      Pusher.logToConsole = true;
+
+    var pusher = new Pusher('1ac5b87f11fc227b3484', {
+      cluster: 'us2'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+    //  alert(JSON.stringify(data));
+    if (my_id == data.user_id) {
+                $('#' + data.friend_id).click();
+            } else if (my_id == data.friend_id) {
+                if (receiver_id == data.user_id) {
+                    // if receiver is selected, reload the selected user ...
+                    $('#' + data.user_id).click();
+                } else {
+                    // if receiver is not seleted, add notification for that user
+                    var pending = parseInt($('#' + data.user_id).find('.pending').html());
+
+                    if (pending) {
+                        $('#' + data.user_id).find('.pending').html(pending + 1);
+                    } else {
+                        $('#' + data.user_id).append('<span class="pending">1</span>');
+                    }
+                }
+            }
+    });
+
+
+
+
+
+      $('.user').click(function () {
+          $('.user').removeClass('active');
+          $(this).addClass('active');
+          $(this).find('.pending').remove();
+
+          receiver_id = $(this).attr('id');
+          $.ajax({
+              type: "get",
+              url: "message/" + receiver_id, // need to create this route
+              data: "",
+              cache: false,
+              success: function (data) {
+                  $('#messages').html(data);
+                  scrollToBottomFunc();
+              }
+          });
+      });     
+
+      $(document).on('keyup', '.input-text input', function (e) {
+            var message = $(this).val();
+
+            // check if enter key is pressed and message is not null also receiver is selected
+            if (e.keyCode == 13 && message != '' && receiver_id != '') {
+                $(this).val(''); // while pressed enter text box will be empty
+                var datastr = "receiver_id=" + receiver_id + "&message=" + message;
+                $.ajax({
+                    type: "get",
+                    url: "/message", // need to create this post route
+                    data: datastr,
+                    cache: false,
+                    success: function (data) {
+                    },
+                    complete: function () {
+                        scrollToBottomFunc();
+                    }
+                })
+            }
+        });
+    });
+  function scrollToBottomFunc() {
+        $('.message-wrapper').animate({
+            scrollTop: $('.message-wrapper').get(0).scrollHeight
+        }, 50);
+    }
+  // make a function to scroll down auto
+
+</script>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
@@ -389,8 +478,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- jQuery -->
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 
-<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->

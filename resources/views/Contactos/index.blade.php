@@ -4,7 +4,6 @@
 <h1 align="center">Facecookies</h1>
 </font>
 
-<!-- <a class="btn btn-success" href="{{ route('usuarios.create')}}">Create</a>  -->
 @empty($contactos)
     <div class="alert alert-primary">
         Tu Lista de contactos esta vacia...!

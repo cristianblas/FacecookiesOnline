@@ -29,9 +29,6 @@ class RequestFriendController extends Controller
     }
     public function edit($id){
         Friend::updateSolicitud($id);
-        Chat::create([
-            'id_friend' => $id,
-        ]);
         return redirect()->route('solicitudes.index');
     }
     public function destroy($id){

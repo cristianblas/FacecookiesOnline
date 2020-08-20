@@ -40,4 +40,6 @@ Route::get('friend/{id}/store','RequestFriendController@store')->name('solicitud
 Route::get('friend/{id}/edit','RequestFriendController@edit')->name('solicitudes.edit');
 Route::get('friend/{id}/destroy','RequestFriendController@destroy')->name('solicitudes.destroy');
 // CU6 gestion de mensajes y notificaciones
-Route::get('message','GestionMessageController@index')->name('chats.index');
+Route::get('show','GestionMessageController@index')->name('chats.index');
+Route::get('/message/{id}','GestionMessageController@getMessage')->name('message');
+Route::get('/message','GestionMessageController@sendMessage');

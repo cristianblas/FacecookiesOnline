@@ -65,6 +65,7 @@ class User extends Authenticatable
         $solicitudesPendientes = Friend::getSolicitado($id);
         $solicitudesEnviadas = Friend::getSolicitudes($id);
         $users = Friend::getContactos($id);
+        $data[]=([0]);
         foreach ($solicitudesPendientes as $solicitudes) {
             $data[] = $solicitudes->name;
         }
