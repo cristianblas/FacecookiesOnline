@@ -4,6 +4,17 @@
         <div class="alert alert-primary">
             Tu Lista de Chats
         </div>
+        <h1> <form class="form-inline " >
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" name="search" type="search" placeholder="Buscar chat" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </h1>
         <div class="row">
             @csrf
             <div class="col-md-4">

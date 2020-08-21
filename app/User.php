@@ -79,4 +79,25 @@ class User extends Authenticatable
             ->orderBy('id', 'asc')->whereNotIn('name', $data)->get();
         return($available);
     }
+
+
+    public static function searchFriend2($id,$query){
+        $solicitudesPendientes = Friend::getSolicitado($id);
+        $solicitudesEnviadas = Friend::getSolicitudes($id);
+        $users = Friend::getContactos($id);
+        $data[]=([0]);
+        foreach ($solicitudesPendientes as $solicitudes) {
+            $data[] = $solicitudes->name;
+        }
+        foreach ($solicitudesEnviadas as $enviadas) {
+            $data[] = $enviadas->name;
+        }
+        foreach ($users as $user) {
+            $data[] = $user->name;
+        }
+        $available = User::where('admin','=',false)->where('users.id','!=',$id)
+            ->where('name','LIKE','%'. $query .'%')
+            ->orderBy('id', 'asc')->whereNotIn('name', $data)->get();
+        return($available);
+    }
 }

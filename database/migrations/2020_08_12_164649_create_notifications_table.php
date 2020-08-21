@@ -17,8 +17,9 @@ class CreateNotificationsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->string('content')->unsigned();
+            $table->string('type')->unsigned();
+            $table->integer('unread')->unsgined();
             $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

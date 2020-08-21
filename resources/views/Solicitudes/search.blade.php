@@ -18,6 +18,14 @@
 
 <div class="table-responsive">
     <table class="table table-striped" >
+      <thead class="thrad-light">
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+            <th>Genero</th>
+        </tr>
+    </thead>
         <tbody>
             @foreach ($users as $user)
             <tr>

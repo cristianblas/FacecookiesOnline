@@ -3,7 +3,6 @@
 namespace App;
 
 use App\User;
-use App\Chat;
 use App\Friend;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
@@ -74,5 +73,36 @@ class Friend extends Model
         ->get();
         $contactos = $contactos1->concat($contactos2)  ;
         return $contactos;
+    }
+    public static function getContactos2($id,$query){
+        $contactos1=DB::table('friends')
+        ->join('users as u','u.id','=','friends.id_solicitado')
+        ->join('users as un','un.id','=','friends.id_solicitante')
+        ->select('friends.id','un.name','un.last_name','un.email','un.telephone','un.years','un.gender')
+        ->where('u.id','=',$id,'and','friends.id_solicitado','=','u.id','and','un.id','=','id_solicitante')
+        ->where('friends.status','=',true)
+        ->where('un.name','LIKE','%'. $query .'%')
+        ->get();
+        $contactos2=DB::table('friends')
+        ->join('users as u','u.id','=','friends.id_solicitado')
+        ->join('users as un','un.id','=','friends.id_solicitante')
+        ->select('friends.id','u.name','u.last_name','u.email','u.telephone','u.years','u.gender')
+        ->where('un.id','=',$id,'and','friends.id_solicitante','=','u.id','and','un.id','=','friends.id_solicitado')
+        ->where('friends.status','=',true)
+        ->where('u.name','LIKE','%'. $query .'%')
+        ->get();
+        $contactos = $contactos1->concat($contactos2)  ;
+        return $contactos;
+    }
+    public static function getID($id){
+        $my_id = (auth()->user()->id);
+        $id_receiver=DB::table('users')
+        ->join('friends as f','f.id','=',$id)
+        ->select('users.id')
+        ->where('id_solicitante','=',$my_id)
+        ->where('id_solicitado','=',$my_id)
+        ->get();
+        return $id_receiver;
+
     }
 }

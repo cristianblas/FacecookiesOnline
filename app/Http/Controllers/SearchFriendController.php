@@ -13,20 +13,12 @@ class SearchFriendController extends Controller
      }
     public function index(Request $request)
     {
-        $id=(auth()->user()->id);   
-        /*     
+        $id=(auth()->user()->id);    
         if($request){
             $query = trim($request->get('search'));
-            $user=User::searchFriend($id)
-              //  ->where('name','LIKE','%'. $query .'%')
-              //  ->where('status','=',true)
-              //  ->where('admin','=',false)
-              //  ->where('id','!=',$id)
-                ->get($query,)
-              //  ->orderBy('id','asc')
-                ;
+            $user=User::searchFriend2($id,$query);
             return view('solicitudes.search',['users'=>$user,'search'=>$query]);
-        }*/
+        }
         $user = User::searchFriend($id);
         return view('solicitudes.search')->with([
             'users' => $user,

@@ -9,13 +9,16 @@ use Illuminate\Http\Request;
 
 class GestionMessageController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {   
         $id=(auth()->user()->id);
+        if($request){
+            $query = trim($request->get('search'));
+            $users = Friend::getContactos2($id,$query);
+            return view('chats.index',['users'=>$users,'search'=>$query]);
+        }
         $users = Friend::getContactos($id);
-        //$contacts = Chat::getChats($id);
         return view('chats.index')->with([
-         //   'contactos' => $contacts,
             'users'=>$users
         ]);
        
@@ -37,12 +40,17 @@ class GestionMessageController extends Controller
         $friend_id = $request->receiver_id;
         $content = $request->message;
 
+       // $id_to =Friend::getID($friend_id) ;
+       // $Notificacion = new Notification();
+
+
         $data = new Message();
         $data->user_id = $my_id;
         $data->friend_id = $friend_id;
         $data->content = $content;
         $data->save();
 
+        
         // pusher
         $options = array(
             'cluster' => 'ap2',
