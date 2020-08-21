@@ -34,12 +34,13 @@ Route::get('contacts','GestionContactsController@index')->name('contactos.index'
 Route::get('contacts/{id}/edit','GestionContactsController@edit')->name('contactos.edit');
 // CU3 buscador de amigos //usuario
 Route::get('search','SearchFriendController@index')->name('busquedas.index');
+// CU4 caja de busqueda de mensajes //usuario
+Route::get('show','SearchMessageController@index')->name('chats.index');
 // CU5 solicitud de amistad //usuario
 Route::get('friend','RequestFriendController@index')->name('solicitudes.index');
 Route::get('friend/{id}/store','RequestFriendController@store')->name('solicitudes.store');
 Route::get('friend/{id}/edit','RequestFriendController@edit')->name('solicitudes.edit');
 Route::get('friend/{id}/destroy','RequestFriendController@destroy')->name('solicitudes.destroy');
 // CU6 gestion de mensajes y notificaciones
-Route::get('show','GestionMessageController@index')->name('chats.index');
 Route::get('/message/{id}','GestionMessageController@getMessage')->name('message');
 Route::get('/message','GestionMessageController@sendMessage');
