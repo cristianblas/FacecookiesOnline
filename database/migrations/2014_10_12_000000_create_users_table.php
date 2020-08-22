@@ -23,8 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('gender')->default('other');
             $table->Integer('telephone')->unsigned();
             $table->boolean('status')->default('true');
-            $table->string('style')->nullable();
-            $table->Integer('font')->nullable();
+            $table->string('style')->default('blue');
+            $table->Integer('font')->default(15);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

@@ -65,7 +65,7 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
+  color: #2f75bb;
   text-align: left;
   background-color: #ffffff;
 }
@@ -11278,7 +11278,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 }
 
 .content-wrapper {
-  background: #f4f6f9;
+  background: #3d5b88;
 }
 
 .content-wrapper > .content {
