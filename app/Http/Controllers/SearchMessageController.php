@@ -19,6 +19,7 @@ class SearchMessageController extends Controller
         return view('chats.index')->with([
             'users'=>$users
         ]);
+
        
     }
 }

@@ -13,6 +13,7 @@ class GestionContactsController extends Controller
      }
     public function index()
     {   
+        
         $id=(auth()->user()->id);
         $contacts = Friend::getContactos($id);
         return view('contactos.index')->with([

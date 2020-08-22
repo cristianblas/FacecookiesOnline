@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Message;
 use App\Friend;
+use App\Notification;
+
 use Illuminate\Http\Request;
 
 class GestionMessageController extends Controller
@@ -27,9 +29,7 @@ class GestionMessageController extends Controller
         $friend_id = $request->receiver_id;
         $content = $request->message;
 
-       // $id_to =Friend::getID($friend_id) ;
-       // $Notificacion = new Notification();
-
+        
 
         $data = new Message();
         $data->user_id = $my_id;
@@ -37,21 +37,24 @@ class GestionMessageController extends Controller
         $data->content = $content;
         $data->save();
 
+
+        $nombre = (auth()->user()->name);
+        $id_enviar = Friend::getID($friend_id);
+        Notification::create([ 
+            'user_id' => $id_enviar,
+            'content' => $nombre ,
+            'type' => 'Te ah enviado un Mensaje',
+            'unread' => 0,
+        ]);
         
-        // pusher
-        $options = array(
-            'cluster' => 'ap2',
-            'useTLS' => true
-        );
-
-        $pusher = new Pusher(
-            env('PUSHER_APP_KEY'),
-            env('PUSHER_APP_SECRET'),
-            env('PUSHER_APP_ID'),
-            $options
-        );
-
-        $data = ['my_id' => $my_id, 'friend_id' => $friend_id]; // sending from and to user id when pressed enter
-        $pusher->trigger('my-channel', 'my-event', $data);
     }
+    public function getNotification(){
+        $notificaciones = Notification::getUnread();
+        return view('notificaciones.index',['notificaciones' => $notificaciones]);
+    }
+    public function destroyNotification($id){
+        Notification::deleteUnread($id);
+        return redirect()->route('notificaciones.index');
+    }
+    
 }

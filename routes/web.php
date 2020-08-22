@@ -44,3 +44,5 @@ Route::get('friend/{id}/destroy','RequestFriendController@destroy')->name('solic
 // CU6 gestion de mensajes y notificaciones
 Route::get('/message/{id}','GestionMessageController@getMessage')->name('message');
 Route::get('/message','GestionMessageController@sendMessage');
+Route::get('/notification','GestionMessageController@getNotification')->name('notificaciones.index');
+Route::get('/notification/{id}/destroy','GestionMessageController@destroyNotification')->name('notificaciones.destroy');

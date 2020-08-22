@@ -175,29 +175,63 @@ scratch. This page gets rid of all links and provides the needed markup only.
     
     <!-- SEARCH FORM FOR ADMIN -->
     <!-- Right navbar links -->
+    
     <ul class="navbar-nav ml-auto">
+     
       @if (!(Auth::user()->admin)) 
+       {{--
       <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
+      <body data-spy="scroll" data-target=".navbar" data-offset="50">
+      <li class="nav-wrapper ">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge">3</span> {{-- cantidad de mensajes--}}
+          <span class="badge badge-danger navbar-badge">3</span> 
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          
+          <a href="#" class="dropdown-item">
+            <!-- Message Start -->
+            <div class="media">
+              <img src="dist/img/usuarioLogo.PNG" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <div class="media-body">
+                <h3 class="dropdown-item-title">
+                  Nombre
+                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                </h3>
+                <p class="text-sm">Call me whenever you can...</p>
+                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> sin marcar como leida</p>
+              </div>
+            </div>
+            <!-- Message End -->
+          </a>
+        
+          
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+
+
+
+
+
+
+          <a href="#" class="dropdown-item dropdown-footer">Marcar como leidas</a>
         </div>
       </li>
+      </body>
+
+
+
+
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span> {{-- cantidad de notificaciones--}}
+          <span class="badge badge-warning navbar-badge">15</span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+          <a href="#" class="dropdown-item dropdown-footer">Marcar como leidas</a>
         </div>
       </li>
+      --}}
       @endif
       <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i
@@ -316,6 +350,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </p>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('notificaciones.index') }}" aria-expanded="false"> 
+                <span class="badge badge-success navbar-badge">1</span> 
+                <i class="fa fa-bell" ></i>
+                <p>
+                    Notificaciones
+                </p>
+              </a>
+            </li>
             {{--
           <li class="nav-item">
               <a class="nav-link" href="{{ route('notificaciones.index') }}" aria-expanded="false"> 
@@ -391,38 +434,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
       });
-      Pusher.logToConsole = true;
-
-    var pusher = new Pusher('1ac5b87f11fc227b3484', {
-      cluster: 'us2'
-    });
-
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
-    //  alert(JSON.stringify(data));
-    if (my_id == data.user_id) {
-                $('#' + data.friend_id).click();
-            } else if (my_id == data.friend_id) {
-                if (receiver_id == data.user_id) {
-                    // if receiver is selected, reload the selected user ...
-                    $('#' + data.user_id).click();
-                } else {
-                    // if receiver is not seleted, add notification for that user
-                    var pending = parseInt($('#' + data.user_id).find('.pending').html());
-
-                    if (pending) {
-                        $('#' + data.user_id).find('.pending').html(pending + 1);
-                    } else {
-                        $('#' + data.user_id).append('<span class="pending">1</span>');
-                    }
-                }
-            }
-    });
-
-
-
-
-
+      
       $('.user').click(function () {
           $('.user').removeClass('active');
           $(this).addClass('active');

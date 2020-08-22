@@ -95,14 +95,20 @@ class Friend extends Model
         return $contactos;
     }
     public static function getID($id){
-        $my_id = (auth()->user()->id);
-        $id_receiver=DB::table('users')
-        ->join('friends as f','f.id','=',$id)
-        ->select('users.id')
-        ->where('id_solicitante','=',$my_id)
-        ->where('id_solicitado','=',$my_id)
+        $my_id=(auth()->user()->id);
+        $ids=DB::table('friends')        //->join('friends as f','f.id','=',$id)
+        ->select('id_solicitante','id_solicitado')
+        ->where('friends.id','=',$id)
         ->get();
-        return $id_receiver;
-
+        foreach ($ids as $id) {
+            $data = $id->id_solicitante;
+        }
+        foreach ($ids as $id) {
+            $data2 = $id->id_solicitado;
+        }
+        if($data == $my_id){
+            return $data2;
+        }
+            return $data;
     }
 }
