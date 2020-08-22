@@ -177,62 +177,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Right navbar links -->
     
     <ul class="navbar-nav ml-auto">
-     
-      @if (!(Auth::user()->admin)) 
-       {{--
-      <!-- Messages Dropdown Menu -->
-      <body data-spy="scroll" data-target=".navbar" data-offset="50">
-      <li class="nav-wrapper ">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge">3</span> 
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="dist/img/usuarioLogo.PNG" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Nombre
-                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> sin marcar como leida</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-        
-          
-          <div class="dropdown-divider"></div>
-
-
-
-
-
-
-          <a href="#" class="dropdown-item dropdown-footer">Marcar como leidas</a>
-        </div>
-      </li>
-      </body>
-
-
-
-
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">Marcar como leidas</a>
-        </div>
-      </li>
-      --}}
-      @endif
       <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i
             class="fa fa-cog fa-spin fa-1x fa-fw"></i></a>
@@ -270,7 +214,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </nav>
   <!-- /.navbar -->
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-white-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-success elevation-4">
     <!-- Sidebar -->
     <div class="sidebar " >
       <!-- Sidebar user panel (optional) -->
@@ -359,16 +303,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </p>
               </a>
             </li>
-            {{--
-          <li class="nav-item">
-              <a class="nav-link" href="{{ route('notificaciones.index') }}" aria-expanded="false"> 
-              <i class="fa fa-bell" ></i>
-              <p>
-                  Notificaciones
-              </p>
-            </a>
-          </li>
-        --}}
         </ul>
       </nav>
       @endif
