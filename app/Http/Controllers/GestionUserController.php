@@ -40,6 +40,8 @@ class GestionUserController extends Controller
             'email' => $request['email'],
             'gender' => $request['gender'],
             'password' => Hash::make($request['password']),
+            'font' => 15,
+            'style' =>'primary',
         ]);
         
         return redirect()->route('usuarios.index')
@@ -53,9 +55,12 @@ class GestionUserController extends Controller
     public function update($user){
           $user = User::findOrFail($user);
           $user->update(request()->all());
+          if($user->admin==true){
           return redirect()->route('usuarios.index')
           ->withSuccess("the user was Edited");
-
+        }
+        return redirect()->route('home')
+        ->withSuccess("the user was Edited");
       }
     public function destroy($user){
           $user = User::findOrFail($user);
@@ -63,5 +68,17 @@ class GestionUserController extends Controller
           return redirect()->route('usuarios.index')
           ->withSuccess("the user was deleted");   
       }
+      public function editUser($user){
+        return view('usuario.edit')->with([
+            'user' => User::findOrFail($user),
+        ]);
+    }
+      public function updateUser($user){
+        $user = User::findOrFail($user);
+        $user->update(request()->all());
+        return redirect()->route('home')
+        ->withSuccess("the user was Edited");
+
+    }
 
 }

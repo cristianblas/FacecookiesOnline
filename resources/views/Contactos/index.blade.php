@@ -14,6 +14,16 @@
         Tu Lista de Contactos
     </div>
     <table class="table table-striped" >
+        <thead class="thrad-light">
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Telefono</th>
+                <th>Edad</th>                
+                <th>Genero</th>
+            </tr>
+        </thead>
         <tbody>
             @foreach ($contactos as $contact)
             <tr>

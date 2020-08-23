@@ -21,6 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
+
   <style>
     /* width */
     ::-webkit-scrollbar {
@@ -159,13 +160,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
     input[type=text]:focus {
         border: 1px solid #aaaaaa;
     }
+    
   </style>
+  <style>
+  html {
+      font-size: {{Auth()->user()->font.'px'}};
+  }
 
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
   <div class="wrapper">
   <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-purple navbar-light" >
+    <nav class="main-header navbar navbar-expand navbar-{{Auth()->user()->style}} navbar-light" >
     <!-- Left navbar links -->  
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -262,6 +269,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!--<p class="nav-icon fa fa-fw fa-home" style="color:#9dbdd3"></p> -->
             <li class="nav-item">
+              <a class="nav-link" href="{{ route('usuarios.edit',Auth::id()) }}" aria-expanded="false"> 
+                   <i class="fa fa-wrench" ></i>
+                   <p>
+                     Editar Perfil 
+                   </p>
+               </a>
+           </li>
+            <li class="nav-item">
                <a class="nav-link" href="{{ route('contactos.index') }}" aria-expanded="false"> 
                     <i class="nav-icon fa fa-address-book" ></i>
                     <p>
@@ -325,6 +340,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="r-panel-body">
             <ul id="themecolors" class="m-t-20">
                 <li class="d-block m-t-30"><b>Estilos</b></li>
+
                 <li><a href="javascript:void(0)" data-theme="default-dark" class="default-dark-theme">7</a></li>
                 <li><a href="javascript:void(0)" data-theme="green-dark" class="green-dark-theme">8</a>
                 </li>
@@ -339,9 +355,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <input name="font-size" id="font-size" value="{{Auth::user()->fontSize}}" type="number" step="0.2" />
         </div>
     </div>
-      <h5>Configuration</h5>
-      <p>Font</p>
-      <p>Style</p>
     </div>
   </aside>
   <!-- /.control-sidebar -->
