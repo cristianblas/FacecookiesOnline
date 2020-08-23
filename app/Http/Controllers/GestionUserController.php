@@ -13,18 +13,16 @@ class GestionUserController extends Controller
         // $this->middleware('auth')->except(['main','edit']);
      }
     public function index(Request $request)
-    {
+    {        
         if($request){
             $query = trim($request->get('search'));
-            $users = User::where('name','LIKE','%'. $query .'%')
-                ->orderBy('id','asc')
-                ->get();
-
-            return view('user.main',['users'=>$users,'search'=>$query]);
+            $users = User::getUser($query);
+        } else {
+            $users= User::all();
         }
-        $user = User::all();
+
         return view('user.main')->with([
-             'users' => User::all(),
+             'users' => $users
         ]);
     }
     public function create(){
