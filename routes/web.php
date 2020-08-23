@@ -29,6 +29,9 @@ Route::post('user/store', 'GestionUserController@store')->name('usuarios.store')
 Route::get('user/{id}/edit','GestionUserController@edit' )->name('usuarios.edit');
 Route::match(['put','patch'],'users/{nombre}', 'GestionUserController@update')->name('usuarios.update');
 Route::delete('user/{user}', 'GestionUserController@destroy')->name('usuarios.destroy');
+Route::get('style/{style}', 'GestionUserController@change')->name('style');
+Route::get('font/{font}', 'GestionUserController@changeFont')->name('font');
+
 // CU2  gestion de contacos //usuario
 Route::get('contacts','GestionContactsController@index')->name('contactos.index');
 Route::get('contacts/{id}/edit','GestionContactsController@edit')->name('contactos.edit');

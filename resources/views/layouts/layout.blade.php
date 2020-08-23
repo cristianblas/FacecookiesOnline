@@ -331,28 +331,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <div class="content-wrapper">
     @yield('content')
   </div><!-- /.container-fluid -->
-  <aside class="control-sidebar control-sidebar-dark">
+  <aside class="control-sidebar control-sidebar-white">
     <!-- Control sidebar content goes here -->
     <div class="p-3">
       <div class="slimscrollright">
         <div class="rpanel-title"> Panel de personalización <span><i class="ti-close right-side-toggle"></i></span>
         </div>
         <div class="r-panel-body">
-            <ul id="themecolors" class="m-t-20">
                 <li class="d-block m-t-30"><b>Estilos</b></li>
-
-                <li><a href="javascript:void(0)" data-theme="default-dark" class="default-dark-theme">7</a></li>
-                <li><a href="javascript:void(0)" data-theme="green-dark" class="green-dark-theme">8</a>
-                </li>
-                <li><a href="javascript:void(0)" data-theme="red-dark" class="red-dark-theme">9</a></li>
-                <li><a href="javascript:void(0)" data-theme="blue-dark" class="blue-dark-theme">10</a>
-                </li>
-                <li><a href="javascript:void(0)" data-theme="purple-dark" class="purple-dark-theme">11</a></li>
-                <li><a href="javascript:void(0)" data-theme="megna-dark" class="megna-dark-theme ">12</a></li>
-            </ul>
-            
-            <label class="d-block m-t-30"> Tamaño de letra </label>
-            <input name="font-size" id="font-size" value="{{Auth::user()->fontSize}}" type="number" step="0.2" />
+                <div class="list-group">
+                <a href="{{('style/blue')}}" class="list-group-item">Blue</a>
+                  <a href="{{('style/dark') }}" class="list-group-item">Dark</a>
+                  <a href="{{('style/green') }}" class="list-group-item">Green</a>
+                  <a href="{{('style/white') }}" class="list-group-item">White</a>
+                  <a href="{{('style/orange')}}" class="list-group-item">Orange</a>
+                </div>
+                <label class="d-block m-t-30"> Tamaño de letra </label>
+                <div class="list-group">
+                  <a href="{{('font/10')}}" class="list-group-item">10</a>
+                    <a href="{{('font/12') }}" class="list-group-item">12</a>
+                    <a href="{{('font/14') }}" class="list-group-item">14</a>
+                    <a href="{{('font/16') }}" class="list-group-item">16</a>
+                    <a href="{{('font/18')}}" class="list-group-item">18</a>
+                  </div>
         </div>
     </div>
     </div>
@@ -372,122 +373,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<script>
-  var receiver_id = '';
-  var my_id = "{{ Auth::id() }}";
-  $(document).ready(function () {
-      $.ajaxSetup({
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-      });
-      
-      $('.user').click(function () {
-          $('.user').removeClass('active');
-          $(this).addClass('active');
-          $(this).find('.pending').remove();
-
-          receiver_id = $(this).attr('id');
-          $.ajax({
-              type: "get",
-              url: "message/" + receiver_id, // need to create this route
-              data: "",
-              cache: false,
-              success: function (data) {
-                  $('#messages').html(data);
-                  scrollToBottomFunc();
-              }
-          });
-      });     
-
-      $(document).on('keyup', '.input-text input', function (e) {
-            var message = $(this).val();
-
-            // check if enter key is pressed and message is not null also receiver is selected
-            if (e.keyCode == 13 && message != '' && receiver_id != '') {
-                $(this).val(''); // while pressed enter text box will be empty
-                var datastr = "receiver_id=" + receiver_id + "&message=" + message;
-                $.ajax({
-                    type: "get",
-                    url: "/message", // need to create this post route
-                    data: datastr,
-                    cache: false,
-                    success: function (data) {
-                    },
-                    complete: function () {
-                        scrollToBottomFunc();
-                    }
-                })
-            }
-        });
-    });
-  function scrollToBottomFunc() {
-        $('.message-wrapper').animate({
-            scrollTop: $('.message-wrapper').get(0).scrollHeight
-        }, 50);
-    }
-  // make a function to scroll down auto
-
-</script>
-
-<script>
-  // Theme color settings
-  $(document).ready(function() {
-      $("*[data-theme]").click(function(e) {
-          e.preventDefault();
-          var currentStyle = $(this).attr('data-theme');
-          localStorage.setItem('theme', currentStyle);
-
-          //store('theme', currentStyle);
-          $('#theme').attr({
-              href: 'css/colors/' + currentStyle + '.css'
-          })
-      });
-
-      var currentTheme = get('theme');
-      if (currentTheme) {
-          $('#theme').attr({
-              href: 'css/colors/' + currentTheme + '.css'
-          });
-      }
-      // color selector
-      $('#themecolors').on('click', 'a', function() {
-          $('#themecolors li a').removeClass('working');
-          $(this).addClass('working')
-      });
-
-  });
-
-  function get(name) {
-
-  }
-
-  $(document).ready(function() {
-      $("*[data-theme]").click(function(e) {
-          e.preventDefault();
-          var currentStyle = $(this).attr('data-theme');
-          //store('theme', currentStyle);
-          databaseStore(currentStyle);
-          localStorage.setItem('theme', currentStyle);
-          $('#theme').attr({
-              href: 'css/colors/' + currentStyle + '.css'
-          })
-      });
-
-      var currentTheme = get('theme');
-      if (currentTheme) {
-          $('#theme').attr({
-              href: 'css/colors/' + currentTheme + '.css'
-          });
-      }
-      // color selector
-      $('#themecolors').on('click', 'a', function() {
-          $('#themecolors li a').removeClass('working');
-          $(this).addClass('working')
-      });
-  });
-
-</script>
+@yield('script')
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->

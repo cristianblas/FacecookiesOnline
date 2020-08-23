@@ -46,7 +46,7 @@ class GestionMessageController extends Controller
             'type' => 'Te ah enviado un Mensaje',
             'unread' => 0,
         ]);
-        
+        return "oki";
     }
     public function getNotification(){
         $notificaciones = Notification::getUnread();

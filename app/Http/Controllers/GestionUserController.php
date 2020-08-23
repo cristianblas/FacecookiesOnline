@@ -12,21 +12,19 @@ class GestionUserController extends Controller
         // $this->middleware('auth');
         // $this->middleware('auth')->except(['main','edit']);
      }
-    public function index(Request $request)
-    {
-        if($request){
-            $query = trim($request->get('search'));
-            $users = User::where('name','LIKE','%'. $query .'%')
-                ->orderBy('id','asc')
-                ->get();
-
-            return view('user.main',['users'=>$users,'search'=>$query]);
-        }
-        $user = User::all();
-        return view('user.main')->with([
-             'users' => User::all(),
-        ]);
-    }
+     public function index(Request $request)
+     {        
+         if($request){
+             $query = trim($request->get('search'));
+             $users = User::getUser($query);
+         } else {
+             $users= User::all();
+         }
+ 
+         return view('user.main')->with([
+              'users' => $users
+         ]);
+     }
     public function create(){
         return view('user.create');
         
@@ -81,6 +79,20 @@ class GestionUserController extends Controller
         return redirect()->route('home')
         ->withSuccess("the user was Edited");
 
+    }
+    public function change($color){
+        $my_id=(auth()->user()->id);
+        $style=User::find($my_id);
+        $style->style=$color;
+        $style->save();
+        return redirect()->route('home');
+    }
+    public function changeFont($tamaño){
+        $my_id=(auth()->user()->id);
+        $font=User::find($my_id);
+        $font->font=$tamaño;
+        $font->save();
+        return redirect()->route('home');
     }
 
 }

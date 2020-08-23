@@ -100,4 +100,10 @@ class User extends Authenticatable
             ->orderBy('id', 'asc')->whereNotIn('name', $data)->get();
         return($available);
     }
+    public static function getUser($query)
+    {
+        return User::where('name', 'LIKE', '%'. $query .'%')
+                ->orderBy('id', 'asc')
+                ->get();
+    }
 }
