@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Message;
 use App\Friend;
 use App\Notification;
@@ -11,9 +10,8 @@ use Illuminate\Http\Request;
 
 class GestionMessageController extends Controller
 {
-    
     public function getMessage($user_id)
-    {   
+    {
         $my_id=(auth()->user()->id);
         $messages = Message::where(function ($query) use ($user_id, $my_id) {
             $query->where('friend_id', $user_id);
@@ -21,7 +19,6 @@ class GestionMessageController extends Controller
             $query->where('user_id', $my_id)->where('friend_id', $user_id);
         })->get();
         return view('messages.index', ['messages' => $messages]);
-        
     }
     public function sendMessage(Request $request)
     {
@@ -40,21 +37,22 @@ class GestionMessageController extends Controller
 
         $nombre = (auth()->user()->name);
         $id_enviar = Friend::getID($friend_id);
-        Notification::create([ 
+        Notification::create([
             'user_id' => $id_enviar,
             'content' => $nombre ,
-            'type' => 'Te ah enviado un Mensaje',
+            'type' => 'Te ha enviado un Mensaje',
             'unread' => 0,
         ]);
         return "oki";
     }
-    public function getNotification(){
+    public function getNotification()
+    {
         $notificaciones = Notification::getUnread();
-        return view('notificaciones.index',['notificaciones' => $notificaciones]);
+        return view('notificaciones.index', ['notificaciones' => $notificaciones]);
     }
-    public function destroyNotification($id){
+    public function destroyNotification($id)
+    {
         Notification::deleteUnread($id);
         return redirect()->route('notificaciones.index');
     }
-    
 }

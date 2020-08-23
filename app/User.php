@@ -18,7 +18,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-   // protected $status = ['true'];
+    // protected $status = ['true'];
 
     protected $style = null ;
     protected $font = null ;
@@ -35,11 +35,13 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function friends_solicitante(){
-        return $this->hasMany(Friend::class,'id_solicitante');
+    public function friends_solicitante()
+    {
+        return $this->hasMany(Friend::class, 'id_solicitante');
     }
-    public function friends_solicitado(){
-        return $this->hasMany(Friend::class,'id_solicitado');
+    public function friends_solicitado()
+    {
+        return $this->hasMany(Friend::class, 'id_solicitado');
     }
     /**
      * The attributes that should be hidden for arrays.
@@ -61,7 +63,8 @@ class User extends Authenticatable
 
 
     
-    public static function searchFriend($id){
+    public static function searchFriend($id)
+    {
         $solicitudesPendientes = Friend::getSolicitado($id);
         $solicitudesEnviadas = Friend::getSolicitudes($id);
         $users = Friend::getContactos($id);
@@ -75,13 +78,14 @@ class User extends Authenticatable
         foreach ($users as $user) {
             $data[] = $user->name;
         }
-        $available = User::where('admin','=',false)->where('users.id','!=',$id)
+        $available = User::where('admin', '=', false)->where('users.id', '!=', $id)
             ->orderBy('id', 'asc')->whereNotIn('name', $data)->get();
         return($available);
     }
 
 
-    public static function searchFriend2($id,$query){
+    public static function searchFriend2($id, $query)
+    {
         $solicitudesPendientes = Friend::getSolicitado($id);
         $solicitudesEnviadas = Friend::getSolicitudes($id);
         $users = Friend::getContactos($id);
@@ -95,8 +99,8 @@ class User extends Authenticatable
         foreach ($users as $user) {
             $data[] = $user->name;
         }
-        $available = User::where('admin','=',false)->where('users.id','!=',$id)
-            ->where('name','LIKE','%'. $query .'%')
+        $available = User::where('admin', '=', false)->where('users.id', '!=', $id)
+            ->where('name', 'LIKE', '%'. $query .'%')
             ->orderBy('id', 'asc')->whereNotIn('name', $data)->get();
         return($available);
     }
